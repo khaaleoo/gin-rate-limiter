@@ -1,0 +1,27 @@
+@startuml ratelimiter
+
+header RateLimiter
+!theme mars
+!pragma teoz true
+
+title RateLimiter Basic Flow
+
+actor IP_1 as c
+control Middleware as m
+control API as api #ff6600
+note over c, api: Middleware config: 1 IP/ 1 minute/ 1 request \n--\n\nThese requestes are made by the same IP address and in one minute \nThe first request is permitted, but the second request is not permitted
+
+
+alt #e5f7ff IP is permitted
+c -> m++: 1st request [at minute 0]
+c -> m++: 2nd request [at minute 0]
+m -> m: verify 1st request
+m -> api: get assets
+return assets
+else #eab676 IP is not permitted
+
+m -> m: verify 2nd request
+return #red error [code: 429]
+end
+
+newpage
