@@ -38,7 +38,7 @@ To create rate limiter instances, use the GetRateLimiterInstance function. Provi
 Example:
 ```go
 import (
-    "github.com/khaaleoo/gin-rate-limiter"
+    "github.com/khaaleoo/gin-rate-limiter/core"
 )
 
 func main() {
